@@ -2,10 +2,10 @@ class Location #< ActiveRecord::Base
 
     @@all = []
 
-    attr_reader :location_id, :venue
+    attr_reader  :venue
 
-    def initialize(location_id, venue)
-        @location_id = location_id
+    def initialize(venue)
+        
         @venue = venue
 
         @@all << self
@@ -14,6 +14,12 @@ class Location #< ActiveRecord::Base
     def self.all
         @@all
     end
+
+    def venues
+        self.venue
+    end
+
+
 
 
 

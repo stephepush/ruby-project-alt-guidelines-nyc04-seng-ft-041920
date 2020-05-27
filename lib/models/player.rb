@@ -2,13 +2,13 @@ class Player #< ActiveRecord::Base
 
     @@all = []
 
-    attr_reader :player_id, :first_name, :last_name
+    attr_reader :player, :name #:first_name, :last_name
 
-    def initialize(player_id, first_name, last_name)
-        @player_id = player_id
-        @first_name = first_name
-        @last_name = last_name
-
+    def initialize(player_id, name)
+        
+        #@first_name = first_name
+        #@last_name = last_name
+        @name = name
 
         @@all << self
     end
@@ -17,6 +17,16 @@ class Player #< ActiveRecord::Base
         @@all
     end
 
+    def game_viewer
+        Schedule.all.select{ |event| event.player.name}
+    end
 
+    def create_user 
+    
+    end
+
+    def create_game(event_id, time, player, location)
+        Schedule.new(event_id, time, player, location)
+    end
 
 end
