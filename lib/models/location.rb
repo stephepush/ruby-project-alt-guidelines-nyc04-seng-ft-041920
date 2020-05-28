@@ -1,26 +1,5 @@
 class Location < ActiveRecord::Base
 
-    @@all = []
-
-    attr_reader  :venue
-
-    def initialize(venue)
-        
-        @venue = venue
-
-        @@all << self
-    end
-
-    def self.all
-        @@all
-    end
-
-    def venues
-        self.venue
-    end
-
-
-
-
-
+    has_many :schedules
+    has_many :players, through: :schedules
 end
