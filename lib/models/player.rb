@@ -1,8 +1,8 @@
-class Player #< ActiveRecord::Base
+class Player < ActiveRecord::Base
 
     @@all = []
 
-    attr_reader :player, :name #:first_name, :last_name
+    attr_reader :name #:first_name, :last_name
 
     def initialize(player_id, name)
         
