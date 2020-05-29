@@ -5,9 +5,9 @@ Schedule.destroy_all
 #players
 p1 = Player.create({name: "James"})
 p2 = Player.create({name: "Julia"})
-p2 = Player.create({name: "Marie"})
-p2 = Player.create({name: "Lamar"})
-p2 = Player.create({name: "Will"})
+p3 = Player.create({name: "Marie"})
+p4 = Player.create({name: "Lamar"})
+p5 = Player.create({name: "Will"})
 
 #locations
 l1 = Location.create({venue: "Bronx"})
