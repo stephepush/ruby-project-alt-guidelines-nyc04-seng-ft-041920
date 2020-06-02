@@ -13,8 +13,8 @@ class CommandLineInterface
         location_input = gets.chomp
     end
 
-    def user_input_hash(name, location, time)
-        user_input = {:name => name, :location => location :schedule => time}
+    def user_input
+        {:name => name, :location => location, :schedule => time}
     end
 
 
