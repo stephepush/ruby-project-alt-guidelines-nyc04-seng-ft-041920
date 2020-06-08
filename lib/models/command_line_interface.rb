@@ -1,5 +1,9 @@
 class CommandLineInterface
 
+    #@@input = []
+    attr_accessor :name, :location, :schedule
+    
+
     def greet
         puts "Welcome to Parkside Pickup, where you can schedule a pickup game at the park!"
     end
@@ -13,57 +17,59 @@ class CommandLineInterface
         location_input = gets.chomp
     end
 
-    def user_input
-        {:name => name, :location => location, :schedule => time}
-    end
+    # def user_input
+    #     {:name => name, :location => location, :schedule => time}
+    # end
 
 
-    def name
-        name_input = gets.chomp
-        user_input[:name] = name_input
+    def input_name
+        self.name = gets.chomp
+        
     end
 
     def add_schedule
-        user_input[:schedule] = gets.chomp
+        self.schedule = gets.chomp
     end
 
-    def location
-        user_input[:location] = gets.chomp
+    def location_input
+        self.location = gets.chomp
         puts "Okay, when would you like to have that game?"
-        schedule_time
+        self.schedule = gets.chomp
+        puts "Alright, #{name}. You would like to schedule a game in #{@location} at #{@schedule}"
+        create_user_instance
     end
 
     def schedule_time
         add_schedule
         put "Alright, let me set that game up"
-        user_hash_to_instance
-        confirmation
+        #user_hash_to_instance
+        #confirmation
     end
 
-    def confirmation
-        puts "Okay, so you're scheduled to play at #{user_input[:location]} at #{user_input[:schedule]}. Hope to see you then!"
-    end
 
     def create_user
         #Player.create(name: name)
-        user_input[:name] = name
+        input_name
+        puts "Hi, #{self.name}!"
         shows_locations
         puts "Where would you like to schedule a pickup game?"
-        location
-
+        location_input
+       
     end
     
     def locations
         Location.all.map do |instance|
             puts instance.venue
         end
-        after_location_string
+        #after_location_string
+        after_intro_location
     end
 
-    def user_hash_to_instance
-        Player.create(name: user_input[:name])
-        Location.create(location: user_input[:location])
-        Schedule.create(schedule:user_input[:time])
+    def create_user_instance
+        Player.create(name: self.name)
+        Location.create(venue: self.location)
+        Schedule.create(time: self.schedule)
+        
     end
         
 
@@ -91,6 +97,7 @@ class CommandLineInterface
         if Location.find_by(venue: greeting_input) != nil
             puts "We schedule for that location! Let's get you signed up! What's your name?"
             create_user
+            
         else
             puts "Sorry, we don't schedule for that location, try another place"
             if Location.find_by(venue: greeting_input) != nil
